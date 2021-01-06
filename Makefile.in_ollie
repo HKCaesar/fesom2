@@ -1,5 +1,6 @@
 
 # Compiler and Linker
+CXX = icpc
 CC = icc
 MPICC = mpiicc 
 MPIFC = mpiifort 
