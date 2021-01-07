@@ -1,6 +1,6 @@
 
 # Compiler and Linker
-CXX = icpc
+MPICXX = mpiicpc
 CC = icc
 MPICC = mpiicc 
 MPIFC = mpiifort 
@@ -10,7 +10,9 @@ LD = $(MPIFC)
 # Metis falls back to conservative and non-compiler specific -O2, as
 # it is only used in the less runtime-critical setup phase. 
 OPT  = -O3 -r8 -fp-model precise -xHost -ip -implicitnone
-COPT = -O3 -xHost -DLINUX -DUNDER_ -DMPI2 -Iinclude
+COPT = -O3 -xHost -DMPI2 -Iinclude
+CXXOPT = -O3 -xHost -std=c++11
+CXX_LIB =  -lstdc++ -lmpicxx -lirng -lstdc++ -ldecimal -lcilkrts  
 
 # NetCDF library and include definitions
 NCFDIR   = /global/AWIsoft/netcdf/4.6.1_intel_18.0.3
@@ -23,7 +25,7 @@ MPI_LIB =
 MPI_INC = 
 
 # Definition of BLAS and LAPACK include and library 
-LIB_LAP = -mkl=sequential -static-intel
+LIB_LAP = -mkl=sequential -static-intel 
 
 
 ## For partitioning, the FESOM initialization offers an interface to Metis 5. 
