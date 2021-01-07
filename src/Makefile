@@ -84,6 +84,7 @@ CXX_OBJECTS = ThreadsManager.o  ThreadsManagerFC.o
 
 OBJECTS=  fvom_main.o 		\
           gen_comm.o 		\
+          cavity_param.o        \
           oce_setup_step.o 	\
           oce_mesh.o 		\
           oce_dyn.o 		\
