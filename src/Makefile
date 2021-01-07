@@ -126,7 +126,7 @@ default: run
 
 run:  $(MODULES) $(OBJECTS) $(CXX_OBJECTS)
 	@echo "======= Building FESOM =========="
-	$(LD) $(OPT) -o $(EXE) $(MODULES) $(OBJECTS) \
+	$(LD) $(OPT) -o $(EXE) $(MODULES) $(OBJECTS) $(CXX_OBJECTS) \
 	 $(MPI_LIB) $(LIB_LAP) $(LIB_PARMS) $(NC_LIB) $(CXX_LIB) 
 #	cp -pf $(EXE) ../bin/.
 
@@ -143,7 +143,6 @@ run_ini: cleanomod $(MOD_INI) $(OBJ_INI)
 	$(MPICC) $(COPT) $(CPP_SOL) $(METIS_DEFS) $(PARMS_DEFS) $(CPP_DEFS) $(METIS_INC) $(PARMS_INC) $(MPI_INC) -c $*.c	
 
 .F90.o :
-	@echo $@
 	$(MPIFC) $(CPP_DEFS) $(CPP_SOL) $(NC_INC) $(OPT) $(OASIS3_INC) $(PARMS_INC) $(MPI_INC)  -c $*.F90
 
 .cpp.o:
