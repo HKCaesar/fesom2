@@ -1,10 +1,8 @@
 module async_threads_module
-
-  use iso_c_binding, only: c_int  
-
   implicit none  
   public thread_type
   private
+  
 
   abstract interface
     subroutine callback_interface(index_argument)
@@ -15,10 +13,10 @@ module async_threads_module
   
   type thread_type
     private
-    integer(kind=c_int) :: idx = 0
+    integer :: idx = 0
     procedure(callback_interface), nopass, pointer :: run_ptr => null()
-    integer             :: run_arg = 0
-    logical             :: with_real_threads = .true.
+    integer :: run_arg = 0
+    logical :: with_real_threads = .true.
   contains
     procedure initialize
     procedure run
@@ -42,13 +40,6 @@ contains
     integer procedure_argument
     ! EO args
     type(wrapper_type), allocatable :: tmparr(:)
-
-    interface 
-       subroutine init_ccall(idx) bind(C, name="init_ccall")
-         use iso_c_binding, only: c_int
-         integer(kind=c_int) :: idx
-       end subroutine init_ccall
-    end interface
 
     if( .not. allocated(threads)) then
       allocate(threads(1))
@@ -74,14 +65,6 @@ contains
 
   subroutine run(this)
     class(thread_type) this
-
-    interface 
-       subroutine begin_ccall(idx) bind(C, name="begin_ccall")
-         use iso_c_binding, only: c_int
-         integer(kind=c_int) :: idx
-       end subroutine begin_ccall
-    end interface
-
     ! EO args
     if(this%with_real_threads) then
       call begin_ccall(this%idx)
@@ -93,14 +76,6 @@ contains
 
   subroutine join(this)
     class(thread_type) this
-
-    interface 
-       subroutine end_ccall(idx) bind(C, name="end_ccall")
-         use iso_c_binding, only: c_int
-         integer(kind=c_int) :: idx
-       end subroutine end_ccall
-    end interface
-
     ! EO args
     if(this%with_real_threads) call end_ccall(this%idx)
   end subroutine
