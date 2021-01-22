@@ -17,7 +17,7 @@ MODULE g_ic3d
    USE g_PARSUP
    USE g_comm_auto
    USE g_support
-   USE g_config, only: dummy, ClimateDataPath, use_cavity
+   USE g_config, only: dummy, ClimateDataPath, use_cavity, flag_cnstocean
    
    IMPLICIT NONE
 
@@ -533,10 +533,12 @@ CONTAINS
       
       !_________________________________________________________________________
       ! Homogenous temp salt initialisation --> for testing and debuging
-!!PS       do n=1,myDim_nod2d + eDim_nod2D
-!!PS             tr_arr(mesh%ulevels_nod2D(n):mesh%nlevels_nod2D(n)-1,n,1) = 16.0
-!!PS             tr_arr(mesh%ulevels_nod2D(n):mesh%nlevels_nod2D(n)-1,n,2) = 35.0
-!!PS       end do 
+      if (flag_cnstocean) then 
+        do n=1,myDim_nod2d + eDim_nod2D
+                tr_arr(mesh%ulevels_nod2D(n):mesh%nlevels_nod2D(n)-1,n,1) = 16.0
+                tr_arr(mesh%ulevels_nod2D(n):mesh%nlevels_nod2D(n)-1,n,2) = 35.0
+        end do 
+      end if 
         
       !_________________________________________________________________________
       ! check initial fields

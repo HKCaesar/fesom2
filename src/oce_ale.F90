@@ -2550,9 +2550,15 @@ subroutine oce_timestep_ale(n, mesh)
 
     t0=MPI_Wtime()
     
-!!PS     water_flux = 0.0_WP
-!!PS     heat_flux  = 0.0_WP
-!!PS     stress_surf= 0.0_WP
+    !___________________________________________________________________________
+    ! Only for debug purpose: create constant ocean without fluxes and boundary
+    ! conditions
+    if (flag_cnstocean) then
+        water_flux = 0.0_WP
+        heat_flux  = 0.0_WP
+        stress_surf= 0.0_WP
+    end if
+    
     !___________________________________________________________________________
     ! calculate equation of state, density, pressure and mixed layer depths
     if (flag_debug .and. mype==0)  print *, achar(27)//'[36m'//'     --> call pressure_bv'//achar(27)//'[0m'
