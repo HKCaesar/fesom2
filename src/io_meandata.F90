@@ -252,6 +252,30 @@ CASE ('kpp_sbuoyflx')
     elseif (mix_scheme_nmb==3 .or. mix_scheme_nmb==37) then ! cvmix KPP
         call def_stream(nod2D, myDim_nod2D,    'kpp_sbuoyflx',    'surface buoyancy flux',   'm2/s3',  kpp_sbuoyflx(:), io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
     end if
+CASE ('kpp_nonlclf   ')
+    if     (mix_scheme_nmb==1 .or. mix_scheme_nmb==17) then! fesom KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_nonlclf',    'KPP non local fluxes', '?',   ghats(:,:),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    elseif (mix_scheme_nmb==3 .or. mix_scheme_nmb==37) then ! cvmix KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_nonlclf',    'KPP non local fluxes', '?',  kpp_nonlcltranspT(:,:), io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    end if
+CASE ('kpp_blmc1   ')
+    if     (mix_scheme_nmb==1 .or. mix_scheme_nmb==17) then! fesom KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_blmc1',    'KPP blmc 1', '?',   blmc(:,:,1),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    elseif (mix_scheme_nmb==3 .or. mix_scheme_nmb==37) then ! cvmix KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_blmc1',    'KPP blmc 1', '?',   kpp_oblmixc(:,:,1),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    end if
+CASE ('kpp_blmc2   ')
+    if     (mix_scheme_nmb==1 .or. mix_scheme_nmb==17) then! fesom KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_blmc2',    'KPP blmc 2', '?',   blmc(:,:,2),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    elseif (mix_scheme_nmb==3 .or. mix_scheme_nmb==37) then ! cvmix KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_blmc2',    'KPP blmc 2', '?',   kpp_oblmixc(:,:,1),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    end if        
+CASE ('kpp_blmc3   ')
+    if     (mix_scheme_nmb==1 .or. mix_scheme_nmb==17) then! fesom KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_blmc3',    'KPP blmc 3', '?',   blmc(:,:,3),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    elseif (mix_scheme_nmb==3 .or. mix_scheme_nmb==37) then ! cvmix KPP
+        call def_stream((/nl-1, nod2D/),  (/nl-1, myDim_nod2D/),    'kpp_blmc3',    'KPP blmc 3', '?',   kpp_oblmixc(:,:,1),          io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
+    end if            
 CASE ('tx_sur    ')
     sel_forcvar(11) = 1
     call def_stream(elem2D, myDim_elem2D,  'tx_sur',    'zonal wind str. to ocean',       'm/s2',   stress_surf(1, :),         io_list(i)%freq, io_list(i)%unit, io_list(i)%precision, mesh)
