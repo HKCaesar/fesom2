@@ -862,6 +862,9 @@ subroutine find_levels_cavity(mesh)
         ulevels(elem) = 1
         do nz=1,nlevels(elem)-1
             !!PS if(Z(nz)<dmean) then
+            ! --> .or. nlevels(elem)-nz<=3 so that there are at least 3 valid 
+            ! depth layers to be able to compute  pressure gradient force  
+            ! with shchepetkin, when easypgf is used this can be maybe omitted
             if(Z(nz)<dmean .or. nlevels(elem)-nz<=3) then
                 exit_flag=1
                 ulevels(elem)=nz

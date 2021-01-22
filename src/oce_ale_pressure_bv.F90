@@ -325,7 +325,11 @@ subroutine pressure_bv(mesh)
             ! initial point --> does oscillation with frequency N. 
             ! N^2<0 stratification is unstable vertical elongated parcel is 
             ! accelerated away from initial point 
-            bvfreq(nz,node)  = -g*dz_inv*(rho_up-rho_dn)/density_0
+!!PS             bvfreq(nz,node)  = -g*dz_inv*(rho_up-rho_dn)/density_0
+            
+            bvfreq(nz,node)  = -g*dz_inv*(rho_up-rho_dn)/rho_dn
+            
+            
 !!PS             bvfreq(nz,node)  = -g*dz_inv*(rho_up-rho_dn)/density_ref(nz,node)
             
             !!PS !--> Why not like this ?
