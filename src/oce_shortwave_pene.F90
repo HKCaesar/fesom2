@@ -38,6 +38,7 @@ subroutine cal_shortwave_rad(mesh)
      ! the visible part (300nm-750nm)
      swsurf=swsurf*0.54_WP
      ! subtract visible sw rad. from heat_flux, which is '+' for upward
+     ! considere heatflux sign change in subroutine oce_fluxes(mesh) !!!
      heat_flux(n2)=heat_flux(n2)+swsurf
  
      ! attenuation func. for vis. sw rad. according to Morel/Antoine param.
