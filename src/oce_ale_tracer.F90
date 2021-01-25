@@ -731,7 +731,7 @@ subroutine diff_ver_part_impl_ale(tr_num, mesh)
         
         !_______________________________________________________________________
         ! case of activated shortwave penetration into the ocean, ad 3d contribution
-        if (use_sw_pene .and. tr_num==1 .and. flag_cnstocean .eq. .false.) then
+        if (use_sw_pene .and. tr_num==1 .and. flag_cnstocean .eqv. .false.) then
             do nz=nzmin, nzmax-1
                 tr(nz)=tr(nz)+(sw_3d(nz, n)-sw_3d(nz+1, n)*area(nz+1,n)/area(nz,n))*dt
             end do
@@ -749,7 +749,7 @@ subroutine diff_ver_part_impl_ale(tr_num, mesh)
         !  (BUT CHECK!)              |    |                         |    |
         !                            v   (+)                        v   (+) 
         !                            
-        if (flag_cnstocean .eq. .false.) then
+        if (flag_cnstocean .eqv. .false.) then
             tr(nzmin)= tr(nzmin)+bc_surface(n, tracer_id(tr_num),mesh) 
         endif
         
