@@ -74,7 +74,7 @@ MODULE o_mixing_KPP_mod
     logical                    :: smooth_hbl =.false.
     logical                    :: smooth_Ri_hor  =.false.
     logical                    :: smooth_Ri_ver  =.false.
-    logical                    :: limit_hbl_ekmmob  =.false. !.true.
+    logical                    :: limit_hbl_ekmmob =.false. !.true.
 
     contains
 
@@ -544,7 +544,7 @@ subroutine bldepth(mesh)
         
         !_______________________________________________________________________
         ! check hbl limits for hekman or hmonob --> eqn. (24)
-        if  (bfsfc(node) > 0.0_WP .and. nzmin==1 .and. limit_hbl_ekmmob .eq. .true.) then
+        if  (bfsfc(node) > 0.0_WP .and. nzmin==1 .and. limit_hbl_ekmmob .eqv. .true.) then
                                           !-> no ekman or monin-obukov when there is cavity  
            hekman = cekman * ustar(node) / MAX( ABS (coriolis_node(node) ), epsln)
            hmonob = cmonob * ustar(node) * ustar(node) * ustar(node)     &
