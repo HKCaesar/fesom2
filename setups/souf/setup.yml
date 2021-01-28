@@ -22,6 +22,9 @@ namelist.config:
         cyclic_length: 4.5
         rotated_grid: False
         force_rotation: False
+        alphaEuler: 0
+        betaEuler: 0
+        gammaEuler: 0
     run_config:
         use_ice: False
         toy_ocean: True
@@ -33,6 +36,9 @@ namelist.config:
 namelist.oce:
     oce_dyn:
         state_equation: 0
+        gamma0: 0.001
+        gamma1: 0.1
+        gamma2: 0.00
         Div_c: 0.5
         Leith_c: 0.05
         w_split: False
